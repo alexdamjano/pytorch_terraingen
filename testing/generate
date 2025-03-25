@@ -1,0 +1,27 @@
+import torch
+import matplotlib.pyplot as plt
+from models.generator import UNetGenerator
+import cv2
+
+# Load trained generator
+generator = UNetGenerator()
+generator.load_state_dict(torch.load("generator.pth"))
+generator.eval()
+
+def generate_terrain(low_res_path):
+    low_res = cv2.imread(low_res_path, cv2.IMREAD_GRAYSCALE)
+    low_res = torch.tensor(low_res, dtype=torch.float32).unsqueeze(0).unsqueeze(0) / 255.0
+
+    with torch.no_grad():
+        high_res = generator(low_res)
+    
+    return high_res.squeeze(0).cpu().numpy()
+
+# Test on a new low-res terrain map
+low_res_test_path = "data/low_res/test_map.png"
+generated_terrain = generate_terrain(low_res_test_path)
+
+# Display the output
+plt.imshow(generated_terrain.squeeze(), cmap='terrain')
+plt.colorbar()
+plt.show()

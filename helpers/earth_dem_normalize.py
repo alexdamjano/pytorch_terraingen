@@ -35,8 +35,8 @@ def save_normalized_dem(dem_array, output_path):
     print(f"Normalized DEM saved as {output_path}")
 
 # Example usage
-input_dem_path = "earth_DEM.png"  # Path to your large DEM image (PNG)
-output_png_path = "normalized_dem.png"  # Output PNG file
+input_dem_path = "big_pics/earth_DEM2.png"  # Path to your large DEM image (PNG)
+output_png_path = "big_pics/normalized_dem.png"  # Output PNG file
 
 # Load the DEM
 dem_array = load_dem(input_dem_path)

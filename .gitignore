@@ -1,2 +1,4 @@
 helpers/data/
 helpers/big_pics/
+helpers/chunker.py/
+helpers/earth_dem_normalized.py/
